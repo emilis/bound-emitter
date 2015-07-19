@@ -14,6 +14,31 @@ build:\
 	dist/bound-emitter.standalone.min.js\
 
 
+setup:\
+
+	npm install browserify uglify
+
+
+publish:\
+	build\
+
+	git push && npm publish
+
+
+publish-patch:\
+	build\
+
+	npm version patch
+	git push && npm publish
+
+
+publish-minor:\
+	build\
+
+	npm version minor
+	git push && npm publish
+
+
 ### Targets -------------------------------------------------------------------
 
 bound-emitter.js:\
