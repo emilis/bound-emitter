@@ -19,7 +19,11 @@
 function BoundEmitter( event_names ){
 
     var ee =                new EventEmitter;
+
+    /// Normalize methods for different EventEmitter implementations:
     ee.off =                ee.off || ee.removeListener;
+    ee.listeners =          ee.listeners || ee.getListeners;
+    ee.getListeners =       ee.getListeners || ee.listeners;
 
     ee.addListener =        ee.addListener.bind( ee );
     ee.on =                 ee.on.bind( ee );
@@ -28,6 +32,7 @@ function BoundEmitter( event_names ){
     ee.removeListener =     ee.removeListener.bind( ee );
     ee.removeAllListeners = ee.removeAllListeners.bind( ee );
     ee.listenrs =           ee.listeners.bind( ee );
+    ee.getListeners =       ee.getListeners.bind( ee );
     ee.emit =               ee.emit.bind( ee );
 
     return event_names.reduce( bindEvent, ee );
@@ -41,6 +46,7 @@ function BoundEmitter( event_names ){
         ee.removeListener[name] =       ee.removeListener.bind( ee, name );
         ee.removeAllListeners[name] =   ee.removeAllListeners.bind( ee, name );
         ee.listeners[name] =            ee.listeners.bind( ee, name );
+        ee.getListeners[name] =         ee.getListeners.bind( ee,name );
         ee.emit[name] =                 ee.emit.bind( ee, name );
 
         return ee;
