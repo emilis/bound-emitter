@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "description": "A function to get an EventEmitter with bound methods for a given event list.",
   "main": "bound-emitter.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "EventEmitter",
     "bound",
     "events",
     "emitter"
   ],
-  "author": "Emilis Dambauskas <emilis.d@gmail.com>",
+  "author": "Emilis Dambauskas <emilis.d@gmail.com> (https://emilis.github.io/)",
+  "bugs": {
+    "url": "https://github.com/emilis/bound-emitter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emilis/bound-emitter.git"
+  },
   "license": "GPL-3.0",
   "devDependencies": {
     "browserify": "^11.0.0",
