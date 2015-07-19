@@ -14,16 +14,27 @@ npm install bound-emitter
 var BoundEmitter =  require( "bound-emitter" );
 
 /// You supply an Array of event names to the function:
-var your_events =   BoundEmitter([ "add", "remove", "change" ]);
+var your_emitter =  BoundEmitter([ "add", "change", "remove" ]);
 
 /// In return you get an object with pre-bound methods for the event names:
-your_events.on.add( addHandler );
-your_events.emit.add({ title: "Some object you jsut added" });
+your_emitter.on.add( console.log.bind( console ) );
+your_emitter.emit.add({ title: "Some object you jsut added" });
 
-var other_events =  BoundEmitter([ "create", "update" ]);
+/// An example EventEmitter for logging application events and erorrs:
+var logger =        BoundEmitter([ "debug", "info", "warn", "error" ]);
+logger.on.info( console.log.bind( console ));
+logger.on.warn( console.warn.bind( console ));
+logger.on.error( console.error.bind( console ));
+/// logger.on.warn( saveToFile );
+/// logger.on.error( notifyAdmins );
 
 /// Connecting two EventEmitters has never been easier:
-your_events.on.add( other_events.emit.create );
+your_emitter.on.change( logger.emit.info );
+your_emitter.on.remove( logger.emit.warn );
+
+/// These will get logged to console:
+your_emitter.emit.change({ title: "Something you changed." });
+your_emitter.emit.remove({ title: "Removing something." });
 ```
 
 ##  Copyright and License
